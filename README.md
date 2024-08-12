@@ -1,16 +1,8 @@
 # snake_game
 
-Test of grids and fot that snake game is perfect
+Snake game is a 2D fun game from my childhood days. 
+So, I re-created the snake game using flutter and dart. 
+Instead of flame engine here I have use grid view to see how can I make it using that. 
+This is also a good example use of flutter gridview.
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Details will be added soon

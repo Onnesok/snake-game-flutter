@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'dart:math';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       home: snake(),
     );
   }
@@ -31,7 +31,7 @@ class snake extends StatefulWidget {
 class _snakeState extends State<snake> {
   final int squaresPerRow = 20;
   final int squaresPerCol = 40;
-  final fontstyle = TextStyle(color: Colors.white, fontSize: 20);
+  final fontstyle = const TextStyle(color: Colors.white, fontSize: 20);
   final randomGen = Random();
 
   var snake = [[0,1], [0, 0]];
@@ -119,17 +119,17 @@ class _snakeState extends State<snake> {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text("Game over"),
+            title: const Text("Game over"),
             content: Text(
               "Score: ${snake.length - 2}",
-                  style: TextStyle(fontSize: 20),
+                  style: const TextStyle(fontSize: 20),
             ),
             actions: [
               ElevatedButton(
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
-                  child: Text("Close"),
+                  child: const Text("Close"),
               ),
             ],
           );
@@ -162,13 +162,13 @@ class _snakeState extends State<snake> {
                 child: AspectRatio(
                   aspectRatio: squaresPerRow / (squaresPerCol + 5),
                   child: GridView.builder(
-                    physics: NeverScrollableScrollPhysics(),
+                    physics: const NeverScrollableScrollPhysics(),
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: squaresPerRow,
                       ),
                       itemCount: squaresPerRow * squaresPerCol,
                     itemBuilder: (BuildContext context, int index) {
-                      var color;
+                      Color? color;
                       var x = index % squaresPerRow;
                       var y = (index / squaresPerRow).floor();
 
@@ -191,7 +191,7 @@ class _snakeState extends State<snake> {
                       }
 
                       return Container(
-                        margin: EdgeInsets.all(1),
+                        margin: const EdgeInsets.all(1),
                         decoration: BoxDecoration(
                           color: color,
                           shape: BoxShape.circle,
@@ -204,7 +204,7 @@ class _snakeState extends State<snake> {
           ),
 
           Padding(
-            padding: EdgeInsets.only(bottom: 20 ),
+            padding: const EdgeInsets.only(bottom: 20 ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -217,11 +217,11 @@ class _snakeState extends State<snake> {
                       startGame();
                     }
                   },
-                  child: Text(
-                    isPlaying ? "End" : "start",
-                  ),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: isPlaying ? Colors.red : Colors.green,
+                  ),
+                  child: Text(
+                    isPlaying ? "End" : "start",
                   ),
                 ),
 
