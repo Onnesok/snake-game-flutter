@@ -10,7 +10,6 @@ on:
 
 jobs:
   build:
-
     runs-on: macos-latest
 
     steps:
@@ -20,7 +19,7 @@ jobs:
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
-          with-cache: true  # Automatically detects the Flutter version from pubspec.yaml and caches it
+          cache: true
 
       - name: Install dependencies
         run: flutter pub get
@@ -29,7 +28,14 @@ jobs:
         run: flutter build apk --release
 
       - name: Build iOS
-        run: flutter build ios --release --no-codesign
+        run: |
+          flutter build ios --release --no-codesign
+          cd build/ios/iphoneos
+          mkdir Payload
+          cd Payload
+          ln -s ../Runner.app
+          cd ..
+          zip -r app.ipa Payload
 
       - name: Build Web
         run: flutter build web --release
@@ -50,11 +56,11 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: ios-build
-          path: build/ios/ipa
+          path: build/ios/iphoneos/app.ipa
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.TOKEN }}
           publish_dir: build/web
-
+          publish_branch: main
