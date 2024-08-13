@@ -12,6 +12,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: snake(),
     );
   }
@@ -34,8 +35,8 @@ class _snakeState extends State<snake> {
   final fontstyle = const TextStyle(color: Colors.white, fontSize: 20);
   final randomGen = Random();
 
-  var snake = [[0,1], [0, 0]];
-  var food = [0,2];
+  var snake = [[10,11], [10, 10]];
+  var food = [10,12];
   var direction = 'up';
   var isPlaying = false;
 
@@ -119,17 +120,67 @@ class _snakeState extends State<snake> {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: const Text("Game over"),
-            content: Text(
-              "Score: ${snake.length - 2}",
-                  style: const TextStyle(fontSize: 20),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
+            ),
+
+            title: Row(
+              children: [
+
+                Icon(Icons.warning_amber_rounded, color: Colors.red, size: 30),
+
+                SizedBox(width: 10),
+
+                Text(
+                  "Game Over",
+                  style: TextStyle(
+                    color: Colors.redAccent,
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  "Score: ${snake.length - 2}",
+                  style: TextStyle(
+                    fontSize: 24,
+                    color: Colors.orange,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                SizedBox(height: 10,),
+                Text("Dev: Ratul Hasan", style: TextStyle(color: Colors.green),),
+                SizedBox(height: 10,),
+                Text("https://github.com/Onnesok", style: TextStyle(color: Colors.blue),),
+              ],
             ),
             actions: [
-              ElevatedButton(
+              Container(
+                width: double.infinity,
+                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                child: OutlinedButton(
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
-                  child: const Text("Close"),
+                  style: OutlinedButton.styleFrom(
+                    backgroundColor: Colors.white,
+                    foregroundColor: Colors.redAccent,
+                    padding: EdgeInsets.symmetric(vertical: 16),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                      side: BorderSide(color: Colors.redAccent),
+                    ),
+                    textStyle: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
+                  child: Text(
+                    "Close",
+                    style: TextStyle(color: Colors.redAccent),
+                  ),
+                ),
               ),
             ],
           );
