@@ -1,3 +1,4 @@
+name: "Build & Release"
 on:
   pull_request:
     branches:
@@ -8,7 +9,6 @@ on:
       - main
       - master
       - develop
-name: "Build & Release"
 jobs:
   build:
     name: Build & Release
@@ -18,12 +18,11 @@ jobs:
       - uses: actions/setup-java@v3
         with:
           distribution: 'zulu'
-          java-version: '12'
+          java-version: '17'
       - uses: subosito/flutter-action@v2
         with:
           channel: 'stable'
           architecture: x64
-
       - run: flutter build apk --release --split-per-abi
       - run: |
           flutter build ios --no-codesign
@@ -39,4 +38,3 @@ jobs:
           artifacts: "build/app/outputs/apk/release/*,build/ios/iphoneos/app.ipa"
           tag: v1.0.${{ github.run_number }}
           token: ${{ secrets.TOKEN }}
-
